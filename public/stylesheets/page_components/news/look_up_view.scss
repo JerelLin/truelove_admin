@@ -1,0 +1,65 @@
+.look_up_view_content{
+	width: 100%;
+	height: 380px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	.user_information{
+		width: 100%;
+		overflow: hidden;
+		.user_information_left{
+			width: 100px;
+			border-radius: 100px;
+			float: left;
+			margin-left: 20px;
+		}
+		.user_information_right{
+			float: left;
+			margin-left: 60px;
+			margin-top: 20px;
+			span{
+				display: block;
+				margin-top: 5px;
+			}
+		}
+		.banned{
+			float: left;
+			margin-left: 120px;
+			margin-top: 15px;
+		}
+	}
+	.split_line{
+		padding: 40px 20px;
+	}
+	.accusation_user_information{
+		width: 100%;
+		overflow: hidden;
+		.accusation_user_information_left{
+			width: 100px;
+			border-radius: 100px;
+			float: left;
+			margin-left: 20px;
+		}
+		.accusation_user_information_right{
+			float: left;
+			margin-left: 60px;
+			margin-top: 10px;
+			span{
+				display: block;
+				margin-top: 5px;
+			}
+		}
+	}
+	.accusation_type, .accusation_reason{
+		padding: 0 50px;
+	}
+	.accusation_screenshot_item{
+		margin-top: 20px;
+		width: 80%;
+		height: 200px;
+		margin-left: 10%;
+		overflow: hidden;
+		.accusation_screenshot_img{
+			width: 100%;
+		}
+	}
+}

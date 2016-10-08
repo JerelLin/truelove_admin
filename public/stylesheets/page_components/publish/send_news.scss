@@ -1,0 +1,15 @@
+.send_news_wrap{
+	margin-top: 30px;
+	.news_box{
+		width: 80%;
+		margin-top:20px;
+		overflow: hidden;
+		.ant-input{
+			width: 600px;
+		}
+		.ant-btn{
+			width: 600px;
+			margin-top: 20px;
+		}
+	}
+}

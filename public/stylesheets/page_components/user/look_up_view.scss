@@ -1,0 +1,61 @@
+.look_up_view_content{
+	width: 100%;
+	height: 380px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	.user_information{
+		width: 100%;
+		overflow: hidden;
+		.user_header_wrap{
+			float: left;
+			margin-left: 20px;
+			.user_header{
+				width: 100px;
+				border-radius: 100px;
+			}
+			.send_news_user{
+				margin-top: 20px;
+				margin-left: 25px;
+				display: block;
+			}
+		}
+		.information{
+			float: left;
+			margin-left: 60px;
+			margin-top: 10px;
+			span{
+				display: block;
+			}
+		}
+		.pass_button{
+			float: left;
+			margin-left: 120px;
+			margin-top: 15px;
+			button{
+				display: block;
+				margin-bottom: 20px;
+			}
+		}
+		.banned{
+			float: left;
+			margin-left: 120px;
+			margin-top: 15px;
+		}
+	}
+	.split_line{
+		padding: 40px 20px;
+	}
+	.user_authentication_information{
+		width: 100%;
+		.user_authentication_img_box{
+			margin-top: 20px;
+			width: 80%;
+			height: 200px;
+			margin-left: 10%;
+			overflow: hidden;
+			.user_authentication_img{
+				width: 100%;
+			}
+		}
+	}
+}

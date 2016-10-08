@@ -1,0 +1,47 @@
+.activity_manage_wrap{
+	.activity_item{
+		margin-top: 30px;
+		width: 90%;
+		height: 250px;
+		margin-left: 5%;
+		overflow: hidden;
+		-webkit-transition: box-shadow .5s;
+		-moz-transition: box-shadow .5s;
+		transition: box-shadow .5s;
+		.activity_cover{
+			width: 100%;
+			height: 100%;
+			position: relative;
+			img{
+				width: 100%;
+				position: absolute;
+			}
+			.black_banner{
+				width: 100%;
+				height: 90px;
+				background-color: rgba( 0, 0, 0, 0.5);
+				position: absolute;
+				bottom: 0;
+				.activity_subject{
+					font-size: 12px;
+					padding: 15px 10px;
+					color: #FFF;
+				}
+				.activity_publish_date{
+					font-size: 12px;
+					padding: 0 10px;
+					color: #FFF;
+				}
+			}
+		}
+	}
+	.activity_item:hover{
+		border: 1px solid #2db7f5;
+	}
+	.pagination{
+		padding: 50px 45px;
+		.ant-pagination {
+			float: right;
+		}
+	}
+}
