@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { fetch_data_get } from "../../../../../fetch_function/fetch.js";
-import { Spin, Pagination } from "antd";
+import { Spin, notification, Pagination } from "antd";
 import "../../../../stylesheets/page_components/other/activity_manage.scss";
 
 class ActivityManage extends React.Component{
@@ -40,7 +40,44 @@ class ActivityManage extends React.Component{
 					loading : false,
 					activity_list : activity_list,
 					activity_total : activity_total
-				});
+				})
+			})
+			.catch(( error ) => { console.log( error ) });
+	}
+
+	// 活动删除
+	activity_delete( activity_id, page ){
+		var _this = this;
+		fetch_data_get("/api/delete_activity", { truelove_admin_token : localStorage.truelove_admin_token, activity_id : activity_id, page : page })
+			.then(( result ) => {
+				if( result.body.error ){
+					notification[ "error" ]( {
+		      				message: "错误",
+		      				description: result.body.message
+		    			} )
+	    				return false
+				}
+				notification[ "success" ]( {
+		      			message: "成功",
+		      			description: result.body.message
+		    		} )
+				_this.setState( { loading : true } )
+				let activity_list = [  ];
+				let activity_total = result.body.activity_total;
+				result.body.activity_list.map(( ele, key ) => {
+					activity_list.push({
+						key : key,
+						activity_id : ele.activity_id,
+						activity_cover : ele.activity_cover,
+	  					activity_subject : ele.activity_subject,
+	  					activity_publish_date : ele.activity_publish_date
+					})
+				})
+				_this.setState( {
+					loading : false,
+					activity_list : activity_list,
+					activity_total : activity_total
+				} )
 			})
 			.catch(( error ) => { console.log( error ) });
 	}
@@ -60,15 +97,23 @@ class ActivityManage extends React.Component{
 					( this.state.activity_list ).length != 0 ? this.state.activity_list.map(( ele, key ) => {
 						return(
 							<div key={ key } className="activity_item">
-								<Link to="/truelove_admin/activity_detail" query={{ activity_id : ele.activity_id }}>
-									<div className="activity_cover">
-										<img src={ ele.activity_cover }/>
-										<div className="black_banner">
-											<div className="activity_subject">活动主题：{ ele.activity_subject }</div>
-											<div className="activity_publish_date">发布日期：{ ele.activity_publish_date }</div>
+								<div className="activity_cover">
+									<img src={ ele.activity_cover }/>
+									<div className="black_banner">
+										<div className="activity_subject">
+											活动主题：{ ele.activity_subject }
+											<a href="javascript:;" className="activity_delete" onClick={ (  ) => this.activity_delete( ele.activity_id, this.state.current ) }>
+												删除
+											</a>
+										</div>
+										<div className="activity_publish_date">
+											发布日期：{ ele.activity_publish_date }
+											<Link to="/truelove_admin/activity_detail" query={ { activity_id : ele.activity_id } } className="look_more">
+												活动详情
+											</Link>
 										</div>
 									</div>
-								</Link>
+								</div>
 							</div>
 						)
 					}) : <div className="activity_empty">还没有发布过什么活动哦 ~ </div>

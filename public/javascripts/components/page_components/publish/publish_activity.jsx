@@ -11,8 +11,8 @@ import "../../../../stylesheets/page_components/publish/look_up_view.scss";
 
 class PublishActivity extends React.Component{
 	constructor( props ){
-		super( props );
-		window.scrollTo( 0, 0 );
+		super( props )
+		window.scrollTo( 0, 0 )
 		this.state = {
 			area_code : "",
 			preview_loading : false,
@@ -56,77 +56,90 @@ class PublishActivity extends React.Component{
 	}
 
 	// 发布活动
-	handlePublish(  ){
-		let _this = this;
-		let area_code = this.state.area_code;
-		let activity_cover = this.state.activity_cover;
-		let activity_subject = this.state.activity_subject;
-		let activity_content = this.state.activity_content;
-
-		console.log( area_code );
+	handlePublish( event ){
+		let _this = this
+		let area_code = this.state.area_code
+		let activity_cover = this.state.activity_cover
+		let activity_subject = this.state.activity_subject
+		let activity_content = this.state.activity_content
 
 		if( area_code == "" ){
 			notification["warning"]({
 		      		message: "小提示",
 		      		description: "你还没选择将要发送的城市哦"
-		    	});
-			return;
-		};
+		    	})
+			return false
+		}
 
 		if( activity_cover == "" ){
 			notification["warning"]({
 		      		message: "小提示",
 		      		description: "快上传一张图片作为活动封面吧！"
-		    	});
-			return;
-		};
+		    	})
+			return false
+		}
 
 		if( activity_subject == "" ){
 			notification["warning"]({
 		      		message: "小提示",
 		      		description: "这么着急的提交？要去约会吗？先把活动主题确定好吧！"
-		    	});
-			return;
-		};
+		    	})
+			return false
+		}
 
 		// 文字匹配
 		if( ! new RegExp("[\\u4E00-\\u9FFF]+","g").test( activity_content )){
 			notification["warning"]({
 	      			message: "小提示",
 	      			description: "活动的内容如果不写点什么的话就没什么意义啦！"
-	    		});
-			return;
+	    		})
+			return false
 		}
 
-		this.setState({ publish_loading : true });
+		this.setState({ publish_loading : true })
 
-		let publish_form = new FormData(  );
-		publish_form.append( "area_code", area_code );
-		publish_form.append( "activity_cover", dataURItoBlob( activity_cover ) );
-		publish_form.append( "activity_subject", activity_subject );
-		publish_form.append( "activity_content", activity_content );
-		publish_form.append( "truelove_admin_token", localStorage.truelove_admin_token );
+		let activityCover = new FormData(  )
+		activityCover.append( "activity_cover", dataURItoBlob( activity_cover ) )
 
-		console.log( publish_form );
-
-		fetch_data_post("/api/publish_activity", publish_form, {    })
+		// 上传活动封面
+		fetch_data_post( "/api/uploadActivityCover", activityCover, {
+			
+		} )
 			.then(( result ) => {
-				_this.setState({ publish_loading : false });
 				if( result.body.error ){
-					notification["error"]({
+					notification["error"]( {
 		      				message: "错误",
 		      				description: result.body.message
-		    			});
-	    				return;
-				};
-				// 发布成功
-				notification["success"]({
-		      			message: "成功",
-		      			description: result.body.message
-		    		});
-				browserHistory.push("/truelove_admin/user_wait_authentication");
+		    			} )
+	    				return false
+				}
+				activity_cover = result.body.FileList
+				let activity_data  = {
+					truelove_admin_token : "truelove_admin_token",
+					activity_cover : activity_cover,
+					area_code : area_code,
+					activity_subject : activity_subject,
+					activity_content : activity_content
+				}
+				fetch_data_post( "/api/publish_activity", activity_data )
+					.then( ( result ) => {
+						if( result.body.error ){
+							notification["error"]( {
+				      				message: "错误",
+				      				description: result.body.message
+				    			} )
+			    				return false
+						}
+						notification["success"]( {
+				      			message: "成功",
+				      			description: result.body.message
+				    		} )
+						_this.setState( { publish_loading : false } )
+						browserHistory.push( "/truelove_admin/activity_manage" )
+					} )
+					.catch(( error ) => console.log( error ))
 			})
-			.catch(( error ) => console.log( error ));
+			.catch(( error ) => console.log( error ))
 	}
 
 
@@ -152,7 +165,7 @@ class PublishActivity extends React.Component{
 				</div>
 				<div className="activity_publish_btn">
 					<Button type="primary" loading = { this.state.preview_loading } onClick={ (  ) => this.handlePreview(  ) }>活动预览</Button>
-					<Button type="primary" loading = { this.state.publish_loading } onClick={ (  ) => this.handlePublish(  ) }>发布活动</Button>
+					<Button type="primary" loading = { this.state.publish_loading } onClick={ ( event ) => this.handlePublish( event ) }>发布活动</Button>
 				</div>
 				<Modal wrapClassName="look_up_view"
 					title = "活动预览"

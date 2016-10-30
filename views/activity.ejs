@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    		<meta charset="utf-8">
+    		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    		<title><%= activity_title %></title>
+  	</head>
+  	<body>
+
+    		<div id="h5_activity_show">
+				<section class="activity_title"><%= activity_title %></section>
+    				<section id="activity_show_main" class="activity_show_main">
+							<section class="activity_post"><img src="<%= activity_post %>" /></section>
+								<% if( share === "true" ){ %>
+										<section class="activity_flower">
+											<img class="flower_img" src="<%= flower_img %>" />
+											<input type="text" id="phone_value" class="phone_value" placeholder="输入手机号码领取花花吧" />
+											<input type="button" id="receive" class="longing_for_love" value="立即领取" />
+										</section>
+								<% } else { %>
+								<section class="activity_flower">
+										<p class="vows">把这朵花送给你的心仪对象，即可享受线下超值浪漫套餐哦！</p>
+										<img class="flower_img" src="<%= flower_img %>" />
+										<input type="button" id="dating" class="longing_for_love" value="我要约会" />
+								</section>
+								<% } %>
+								<input type="text" class="hidden" id="save_activity_id" value="<%= activity_id %>" />
+								<input type="text" class="hidden" id="save_user_id" value="<%= user_id %>" />
+								<section class="activity_detail">
+										<p>活动详情<p>
+										<iframe name="activity_iframe" frameBorder="0" width="100%" height="100%" scrolling="no" onload="this.height = activity_iframe.document.documentElement.scrollHeight || activity_iframe.document.body.scrollHeight" src="<%= activity_html_url %>"></iframe>
+								</section>
+    				</section>
+					<!-- 阴影层 -->
+					<section id="shadow" class="shadow"></section>
+					<section id="share_for_love" class="share_for_love">
+						<p>分享到</p>
+						<div><span id="share_to_qq" class="share_icon love_icon"></span><span id="share_to_truelove" class="share_icon qq_icon"></span><span id="share_to_wechat" class="share_icon wechat_icon"></span></div>
+					</section>
+    		</div>
+			<script type="text/javascript" src="/src/js/activity_script.js"></script>
+  	</body>
+</html>

@@ -43,7 +43,7 @@ class Users extends React.Component{
 						user_id : ele.user_id,
 						user_header : ele.user_header,
 	  					user_name : ele.user_name,
-	  					user_sex : ele.user_sex,
+	  					user_sex : ele.user_sex == 0 ? "女" : "男",
 	  					user_age : ele.user_age,
 	  					user_description : ele.user_description,
 	  					user_area : ele.user_area,
@@ -126,7 +126,8 @@ class Users extends React.Component{
 		      			description: result.body.message
 		    		});
 				_this.setState({ submit_loading : false });
-				this.look_up_view_close(  );
+				_this.look_up_view_close(  );
+				_this.get_users( _this.state.filter_select );
 			})
 			.catch(( error ) => { console.log( error ) });
 	}
@@ -144,7 +145,7 @@ class Users extends React.Component{
 				  	<span>
 				    		<a href="#" onClick = { (  ) => this.look_up( record.user_id, record.user_header, record.user_name, record.user_sex, record.user_age, record.user_area, record.registered_date, record.authentication_state, record.account_state ) }>查看</a>
 					      	<span className="ant-divider"></span>
-					      	<a href="#">删除</a>
+					      	<Link to="/truelove_admin/chat" query={{ user_id : record.user_id }}>对话</Link>
 					</span>
 				)
 			}

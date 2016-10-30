@@ -21,11 +21,6 @@
 				margin-top: 5px;
 			}
 		}
-		.banned{
-			float: left;
-			margin-left: 120px;
-			margin-top: 15px;
-		}
 	}
 	.split_line{
 		padding: 40px 20px;
@@ -48,6 +43,11 @@
 				margin-top: 5px;
 			}
 		}
+		.banned{
+			float: left;
+			margin-left: 120px;
+			margin-top: 15px;
+		}
 	}
 	.accusation_type, .accusation_reason{
 		padding: 0 50px;
@@ -55,9 +55,7 @@
 	.accusation_screenshot_item{
 		margin-top: 20px;
 		width: 80%;
-		height: 200px;
 		margin-left: 10%;
-		overflow: hidden;
 		.accusation_screenshot_img{
 			width: 100%;
 		}

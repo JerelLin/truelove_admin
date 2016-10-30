@@ -33,7 +33,7 @@ class UserWaitAuthentication extends React.Component{
 						user_id : ele.user_id,
 						user_header : ele.user_header,
 	  					user_name : ele.user_name,
-	  					user_sex : ele.user_sex,
+	  					user_sex : ele.user_sex == 0 ? "女" : "男",
 	  					user_age : ele.user_age,
 	  					user_description : ele.user_description,
 	  					user_area : ele.user_area,
@@ -91,7 +91,7 @@ class UserWaitAuthentication extends React.Component{
 						user_id : ele.user_id,
 						user_header : ele.user_header,
 	  					user_name : ele.user_name,
-	  					user_sex : ele.user_sex,
+	  					user_sex : ele.user_sex == 0 ? "女" : "男",
 	  					user_age : ele.user_age,
 	  					user_description : ele.user_description,
 	  					user_area : ele.user_area,
@@ -128,7 +128,7 @@ class UserWaitAuthentication extends React.Component{
 						user_id : ele.user_id,
 						user_header : ele.user_header,
 	  					user_name : ele.user_name,
-	  					user_sex : ele.user_sex,
+	  					user_sex : ele.user_sex == 0 ? "女" : "男",
 	  					user_age : ele.user_age,
 	  					user_description : ele.user_description,
 	  					user_area : ele.user_area,
@@ -137,7 +137,7 @@ class UserWaitAuthentication extends React.Component{
 				});
 				this.setState({ user_wait_authentication_list : user_wait_authentication_list })
 			})
-			.catch(( error ) => { console.log( error ) });
+			.catch(( error ) => { console.log( error ) })
 	}
 	
 	render(  ){
@@ -151,7 +151,7 @@ class UserWaitAuthentication extends React.Component{
 				  	<span>
 				    		<a href="#" onClick = { (  ) => this.look_up( record.user_id, record.user_header, record.user_name, record.user_sex, record.user_age, record.user_area, record.submit_date ) }>查看</a>
 					      	<span className="ant-divider"></span>
-					      	<a href="#">删除</a>
+					      	<a href="#">对话</a>
 					</span>
 				)
 			}

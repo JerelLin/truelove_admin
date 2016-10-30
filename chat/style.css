@@ -1,0 +1,125 @@
+.chat_room_wrap .btn {
+  text-align: center;
+  width: 10%;
+  height: 32px;
+  line-height: 32px;
+  background-color: #2C97E8;
+  color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity 0.8s;
+}
+.chat_room_wrap .btn:hover {
+  opacity: 0.6;
+}
+.chat_room_wrap .btn:active {
+  opacity: 1;
+}
+.chat_room_wrap .item {
+  margin: 10px 0px;
+}
+.chat_room_wrap .item p {
+  margin: 5px;
+}
+.chat_room_wrap .input-send {
+  padding: 5px 10px;
+  width: 90%;
+}
+
+/* 系统消息 */
+.chat_room_wrap .system_message{
+  color: #666;
+}
+
+/* 聊天窗口 */
+.chat_room_wrap .print-wall {
+  overflow: auto;
+  margin: 25px auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  height: 450px;
+  width: 100%;
+  text-align: left;
+}
+.chat_room_wrap .print-wall p {
+  position: relative;
+  margin: 20px 0px;
+  word-wrap: break-word;
+}
+/* 聊天日期 */
+.chat_room_wrap .chat_date{
+  color: #666;
+  text-align: center;
+}
+/* 清除浮动 */
+.chat_room_wrap .clear_float{
+  overflow: hidden;
+}
+/* 小初头像 */
+.chat_room_wrap .header{
+  width: 50px;
+}
+/*  用户头像 */
+.chat_room_wrap .user_header{
+  float: right;
+  margin-left: 20px;
+}
+
+/* 对话气泡 */
+.chat_room_wrap .chat_bubble{
+  max-width: 600px;
+  color: #fff;
+  border: #2C97E8 solid 1px;
+  background: #2C97E8; 
+  min-height: 1.37em;
+  margin-left: 20px;
+  padding: 10px;
+  font-size: 12px;
+  vertical-align: bottom;
+  border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  line-height: 20px;
+  word-break: break-all;
+}
+.chat_room_wrap .chat_bubble_left::before{
+    border-top: #2C97E8 solid 1px;
+    border-right: #2C97E8 solid 1px;
+    background: #2C97E8;
+    z-index: 10;
+    width: 7px;
+    height: 7px;
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: -5px;
+    -webkit-transform: rotate(45deg) skew(-6deg,-6deg);
+    -moz-transform: rotate(45deg) skew(-6deg,-6deg);
+    transform: rotate(45deg) skew(-6deg,-6deg)
+}
+.chat_room_wrap .chat_bubble_right{
+  float: right;
+}
+.chat_room_wrap .chat_bubble_right::before{
+    border-top: #2C97E8 solid 1px;
+    border-right: #2C97E8 solid 1px;
+    background: #2C97E8;
+    z-index: 10;
+    width: 7px;
+    height: 7px;
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: -5px;
+    -webkit-transform: rotate(45deg) skew(-6deg,-6deg);
+    -moz-transform: rotate(45deg) skew(-6deg,-6deg);
+    transform: rotate(45deg) skew(-6deg,-6deg)
+}
+
+/* 聊天记录 */
+.chat_room_wrap .chat_history{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  color: #666;
+}

@@ -1,0 +1,131 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+html, body{
+	font-size: 14px;
+	font-family: 微软雅黑;
+}
+.longing_for_love{
+	display: block;
+	width: 100%;
+	height: 30px;
+	margin-top: 10px;
+	border-radius: 6px;
+	background-color: #FF1493;
+	border: 1px solid #FF1493;
+	font-family: 微软雅黑;
+	font-size: 0.8rem;
+	color: #FFF;
+}
+#h5_activity_show .activity_title{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 1rem;
+	color: #FFF;
+	background-color: #FF1493;
+}
+#h5_activity_show .activity_show_main{
+	width: 100%;
+}
+#h5_activity_show .activity_show_main .activity_post{
+	width: 100%;
+	margin-bottom: 10px;
+}
+#h5_activity_show .activity_show_main .activity_post img{
+	width: 100%;
+}
+#h5_activity_show .activity_show_main .activity_flower{
+	width: 80%;
+	margin: 20px 10%;
+}
+#h5_activity_show .activity_show_main .activity_flower .vows{
+	font-size: 0.8rem;
+	line-height: 20px;
+}
+#h5_activity_show .activity_show_main .activity_flower .flower_img{
+	margin-top: 10px;
+	width: 100%;
+}
+#h5_activity_show .activity_show_main .activity_flower .phone_value{
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	height: 40px;
+	padding: 10px;
+	margin-top: 10px;
+	border-radius: 6px;
+	background-color: #FFF;
+	border: 1px solid #FF1493;
+	font-family: 微软雅黑;
+	font-size: 0.8rem;
+}
+#h5_activity_show .activity_show_main .activity_detail p{
+	box-sizing: border-box;
+	font-size: 0.8rem;
+	color: #FF1493;
+	width: 100%;
+	padding: 10px 10px;
+}
+.hidden{
+	display: none;
+}
+/* 阴影层 */
+.shadow{
+	display: none;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba( 0, 0, 0, .5 );
+}
+/* 底部分享 */
+.share_for_love{
+        color: #FF1493;
+        width: 100%;
+        height: 125px;
+        background-color: #FFF;
+        position: fixed;
+        bottom: -125px;
+        transition: bottom .5s;
+        -webkit-transition: bottom .5s;
+        -moz-transition: bottom .5s;
+}
+.share_for_love p{
+		font-size: 12px;
+        height: 30px;
+        box-sizing: border-box;
+		padding-top: 10px;
+        padding-left: 10px;
+        line-height: 30px;
+}
+.share_for_love div{
+		padding-top: 10px;
+        width: 100%;
+        height: 70px;
+}
+.share_icon{
+        float: left;
+        display: inline-block;
+        width: 28%;
+        height: 100%;
+        margin-left: 4%;
+        background: url("../../../asset/src/img/love_icon.png") no-repeat center center;
+		overflow: hidden;
+}
+
+/* 弹出层样式重置 */
+.tingle-modal{
+	background: rgba( 0, 0, 0, .5 ) !important;
+}
+.tingle-modal-box{
+	width: 75% !important;
+}
+.tingle-modal-box__footer{
+	background-color: #FFF !important;
+}
+.tingle-modal__close{
+	display: none;
+}

@@ -12,7 +12,7 @@ class Editor extends React.Component{
 	      	let id = this.props.id;
 	      	wangEditor.config.printLog = false;
 	            this.editor = new wangEditor( id );
-	            this.editor.config.uploadImgUrl = "/api/upload";
+	            this.editor.config.uploadImgUrl = "/api/uploadTextPic";
 	            this.editor.config.uploadParams = {
 	             	truelove_admin_token : localStorage.truelove_admin_token
 	            };

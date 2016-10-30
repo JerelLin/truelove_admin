@@ -5,7 +5,7 @@ import User from "./components/layout_components/user.jsx";
 import "../stylesheets/layout_components/app_layout.scss";
 
 class App extends React.Component{
-	render(){
+	render(  ){
 		return(
 			<div className="container">
                 <Nav />

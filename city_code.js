@@ -1,6 +1,10 @@
 module.exports = {
     city_code : [
     {
+    label : "所有城市",
+    value : 10000
+    },
+    {
     label : "安徽省",
     value : 10001,
     children : [

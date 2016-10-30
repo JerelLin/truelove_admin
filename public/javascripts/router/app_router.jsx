@@ -71,6 +71,10 @@ ReactDOM.render(
 					require.ensure( [ ], (require) => { 
 						callback(null, require("../components/page_components/other/activity_detail.jsx").default) 
 					}) } } />
+				<Route path="/truelove_admin/chat" onEnter={ auth.replace_away } getComponent={ (nextState, callback) =>{ 
+					require.ensure( [ ], (require) => { 
+						callback(null, require("../components/page_components/other/chat.jsx").default) 
+					}) } } />
 				{/* 未登录 */}
 				<Route path="/truelove_admin/notlogin" onEnter={ auth.already_login } getComponent={ (nextState, callback) =>{ 
 					require.ensure( [ ], (require) => { 

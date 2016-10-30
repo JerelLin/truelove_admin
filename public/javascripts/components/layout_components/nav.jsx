@@ -2,7 +2,7 @@ import React from "react";
 import { Link, IndexLink } from "react-router";
 
 class Nav extends React.Component{
-	render(){
+	render(  ){
 		return(
 			<ul className="nav">
 				<div className="logo_area">初恋管理后台</div>

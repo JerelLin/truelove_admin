@@ -138,7 +138,7 @@ class AccusationPage extends React.Component{
 		var _this = this;
 		let banned_select = this.state.banned_select;
 		_this.setState({ submit_loading : true });
-		fetch_data_get("/api/banned", { truelove_admin_token : localStorage.truelove_admin_token, accusation_user_id : accusation_user_id, banned_select : banned_select })
+		fetch_data_get("/api/banned", { truelove_admin_token : localStorage.truelove_admin_token, user_id : accusation_user_id, banned_select : banned_select })
 			.then(( result ) => {
 				if( result.body.error ){
 					notification["error"]({
@@ -192,6 +192,18 @@ class AccusationPage extends React.Component{
 									<span className="user_name">举报者：{ this.state.accusation_detail_existing.user_name }</span>
 									<span className="accusation_date">举报日期：{ this.state.accusation_detail_existing.accusation_date }</span>
 								</div>
+							</div>
+							<p className="split_line">举报对象</p>
+							<div className="accusation_user_information">
+								<img className="accusation_user_information_left" src={ this.state.accusation_detail_new.accusation_user_header } />
+								<div className="accusation_user_information_right">
+									<span className="accusation_user_name">昵称：{ this.state.accusation_detail_new.accusation_user_name }</span>
+									<span className="accusation_user_sex">性别：{ this.state.accusation_detail_new.accusation_user_sex ==0 ? "女" : "男" }</span>
+									<span className="accusation_user_area">居住地：{ this.state.accusation_detail_new.accusation_user_area }</span>
+									<span className="accusation_user_auth_state">认证状态：{ this.state.accusation_detail_new.accusation_user_auth_state }</span>
+									<span className="accusation_user_account_state">账号状态：{ this.state.accusation_detail_new.accusation_user_account_state }</span>
+									<span className="accusation_num">曾被举报： { this.state.accusation_detail_new.accusation_num } 次</span>
+								</div>
 								<div className="banned">
 									<Select labelInValue defaultValue={{ key: "not_banned" }} style={{ width: 120 }} onChange={ ( value ) => this.handle_banned( value ) }>
       										<Option value="not_banned">不予惩罚</Option>
@@ -201,18 +213,6 @@ class AccusationPage extends React.Component{
       										<Option value="banned_month">封号一个月</Option>
       										<Option value="banned_forever">永久封号</Option>
     									</Select>
-								</div>
-							</div>
-							<p className="split_line">举报对象</p>
-							<div className="accusation_user_information">
-								<img className="accusation_user_information_left" src={ this.state.accusation_detail_new.accusation_user_header } />
-								<div className="accusation_user_information_right">
-									<span className="accusation_user_name">昵称：{ this.state.accusation_detail_new.accusation_user_name }</span>
-									<span className="accusation_user_sex">性别：{ this.state.accusation_detail_new.accusation_user_sex }</span>
-									<span className="accusation_user_area">居住地：{ this.state.accusation_detail_new.accusation_user_area }</span>
-									<span className="accusation_user_auth_state">认证状态：{ this.state.accusation_detail_new.accusation_user_auth_state }</span>
-									<span className="accusation_user_account_state">账号状态：{ this.state.accusation_detail_new.accusation_user_account_state }</span>
-									<span className="accusation_num">曾被举报： { this.state.accusation_detail_new.accusation_num } 次</span>
 								</div>
 							</div>
 							<p className="split_line">举报类型</p>

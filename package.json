@@ -14,15 +14,22 @@
     "eventproxy": "^0.3.5",
     "express": "~4.13.1",
     "formidable": "^1.0.17",
+    "leancloud-realtime": "^3.3.0",
+    "leancloud-realtime-plugin-typed-messages": "^1.0.0",
+    "leancloud-storage": "^1.5.1",
     "mongoose": "^4.5.8",
     "morgan": "~1.6.1",
+    "multer": "^1.2.0",
+    "node-fetch": "^1.6.3",
     "react": "^15.3.0",
     "react-cropper": "^0.9.4",
     "react-dom": "^15.3.0",
+    "react-frame-component": "^0.6.6",
     "react-router": "^2.6.1",
     "serve-favicon": "~2.3.0",
     "superagent": "^2.1.0",
-    "wangeditor": "^2.1.19"
+    "wangeditor": "^2.1.19",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.11.4",

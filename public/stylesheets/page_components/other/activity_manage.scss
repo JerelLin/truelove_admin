@@ -26,17 +26,29 @@
 					font-size: 12px;
 					padding: 15px 10px;
 					color: #FFF;
+					overflow: hidden;
+					.activity_delete{
+						float: right;
+						margin-right: 35px;
+						color: #FFF;
+					}
 				}
 				.activity_publish_date{
 					font-size: 12px;
 					padding: 0 10px;
 					color: #FFF;
+					overflow: hidden;
+					.look_more{
+						float: right;
+						margin-right: 20px;
+						color: #FFF;
+					}
 				}
 			}
 		}
 	}
 	.activity_item:hover{
-		border: 1px solid #2db7f5;
+		
 	}
 	.pagination{
 		padding: 50px 45px;
