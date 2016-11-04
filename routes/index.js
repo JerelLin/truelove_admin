@@ -203,11 +203,6 @@ router.get("/api/banned", function( req, res, next ){
 			.catch(( error ) => { console.log( error ) });
 })
 
-// 获取用户消息列表
-router.get("/api/get_user_news_list", function( req, res, next ){
-	console.log( req.query );
-	res.json({ user_news_total : data.user_news_total, user_news_list : data.user_news_list })
-})
 
 // 获取用户以及动态举报列表（第一页）（并行获取）
 router.get("/api/get_accusation_list", function( req, res, next ){
@@ -377,15 +372,6 @@ router.get("/api/delete_activity", function( req, res, next ){
 				} )
 			} )
 			.catch(( error ) => { console.log( error ) })
-})
-
-// 保存最后聊天的聊天记录
-router.post("/api/save_last_message", function( req, res, next ){
-	var user_id, last_message
-	user_id = req.body.user_id
-	last_message = req.body.last_message
-	console.log( user_id, last_message )
-	res.end(  )
 })
 
 // 获取用户举报列表

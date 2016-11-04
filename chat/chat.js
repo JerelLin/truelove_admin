@@ -4,6 +4,8 @@
 import AV from "leancloud-storage"
 import { Realtime } from "leancloud-realtime"
 import { TextMessage } from "leancloud-realtime"
+import { TypedMessagesPlugin } from "leancloud-realtime-plugin-typed-messages"
+import { ImageMessage } from "leancloud-realtime-plugin-typed-messages"
 
 class Chat{
     constructor( config ){
@@ -43,12 +45,12 @@ class Chat{
         // createConversation
         this.conversationName = config.conversationName
         this.conversationMembers = config.conversationMembers
-
-        // 发送消息按钮
-        this.sendBtn = config.sendBtn
         
         // 消息输入框
         this.inputSend = config.inputSend
+
+        // 聊天图片选择
+        this.photoFileUpload = config.photoFileUpload
 
         // 聊天窗口
         this.printWall = config.printWall
@@ -61,10 +63,12 @@ class Chat{
         // 连接服务器
         this.main(  )
 
-        // 触发事件发送消息
-        this.bindEvent( this.sendBtn, "click", function( e ) {
-            _this.sendMsg(  )
+         // 触发事件发送图片
+         this.bindEvent( this.photoFileUpload, "change", function( e ) {
+         	_this.sendPic(  )
         } )
+
+        // 触发事件发送消息
          this.bindEvent( document.body, "keydown", function( e ) {
          	if( e.keyCode == 13 ) {
                   _this.sendMsg(  )
@@ -89,7 +93,9 @@ class Chat{
 		// 创建实时通信实例
 		_this.realtime = new Realtime( {
 			appId : _this.appId,
-			appKey : _this.appKey
+			appKey : _this.appKey,
+			pushOfflineMessages: true,
+			plugins: [ TypedMessagesPlugin ]	// 注册富媒体消息插件
 		} )
 		// 创建聊天客户端
 		_this.realtime.createIMClient( _this.clientId )
@@ -139,17 +145,47 @@ class Chat{
 				} )
 				// 房间接受消息
 				conversation.on( "message", function( message ) {
+					let file
 					console.log( "接收到消息啦！" + message )
 					if ( !_this.msgTime ) {
 						// 存储下最早的一个消息时间戳
 						_this.msgTime = message.timestamp
 					}
-					_this.showMsg( message, false )
+					switch (message.type) {
+					    case TextMessage.TYPE:
+					      console.log('收到文本消息， text: ' + message.getText() + ', msgId: ' + message.id)
+					      _this.showMsg( message, false )
+					      break
+					    case ImageMessage.TYPE:
+					      file = message.getFile()
+					      console.log('收到图片消息，url: ' + file.url() + ', width: ' + file.metaData('width'))
+					      _this.showMsg( message, false )
+					      break
+					     default:
+      						console.warn('收到未知类型消息')
+					}
 				} )
 			} )
 			.catch( function( err ) {
 				console.error( err )
 			} )
+	}
+
+	// 发送图片
+	sendPic(  ) {
+		var _this = this
+		var fileUploadControl = _this.photoFileUpload
+		var file = new AV.File("avatar.jpg", fileUploadControl.files[0])
+		file.save(  ).then(function() {
+		  var message = new ImageMessage(file)
+		  message.setText('来自小初的聊天照片')
+		  message.setAttributes({ location: '广东深圳' })
+		  return _this.room.send(message)
+		}).then(function( message ) {
+		  console.log('发送成功')
+		  _this.showLog( '<p class="chat_date">' + _this.formatTime( message.timestamp ) + '</p>' + "<img class='header' src=" + _this.love_header + " />", "<img class='pic_send' src=" + message.getFile().url() + " />", false )
+		  _this.printWall.scrollTop = _this.printWall.scrollHeight
+		}).catch(console.error.bind(console))
 	}
 
     	//发送消息
@@ -180,14 +216,18 @@ class Chat{
 		                if ( String( text ).replace( /^\s+/, '' ).replace( /\s+$/, '' ) ) {
 		                    this.showLog( '<p class="chat_date">' + this.formatTime( message.timestamp ) + '</p><p class="clear_float">' + from, this.encodeHTML( message.text ), isBefore )
 		                }
-		            }
+		            }else if (message instanceof ImageMessage) {
+			    this.showLog( '<p class="chat_date">' + this.formatTime( message.timestamp ) + '</p><p class="clear_float">' + from, "<img class='pic_send' src=" + message.getFile().url() + " />", isBefore )
+			}
 		} else {
 		            from = "<img class='header user_header' src=" + this.user_header + " />"
 		            if ( message instanceof TextMessage ) {
 		                if ( String( text ).replace( /^\s+/, '' ).replace( /\s+$/, '' ) ) {
 		                    this.showLog( '<p class="chat_date">' + this.formatTime( message.timestamp ) + '</p><p class="clear_float">' + from, this.encodeHTML( message.text ), isBefore, true )
 		                }
-		            }
+		            }else if (message instanceof ImageMessage) {
+			    this.showLog( '<p class="chat_date">' + this.formatTime( message.timestamp ) + '</p><p class="clear_float">' + from, "<img class='pic_send' src=" + message.getFile().url() + " />", isBefore, true )
+			}
 		}
 	}
 
@@ -225,7 +265,7 @@ class Chat{
 			_this.logFlag = true
 		} 
 		_this.messageIterator.next(  ).then( function( result ) {
-		    var data = result.value
+		    	var data = result.value
 			_this.logFlag = false
 
 			// 存储下最早一条的消息时间戳
@@ -269,11 +309,6 @@ class Chat{
 		} else {
 			dom.attachEvent( "on" + eventName, fun )
 		}
-	}
-
-	// 返回最后一条聊天记录
-	return_last_message(  ){
-		return this.last_message
 	}
 }
 
